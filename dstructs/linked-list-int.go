@@ -12,6 +12,7 @@ type LinkedList struct {
 	head *Node
 }
 
+// Main routine tests llist functions
 func main() {
 	l := Initialize(0)
 	//Display(l)	
@@ -68,9 +69,21 @@ func Search(l *LinkedList, val int) (found *Node) {
 }
 
 func Delete(l *LinkedList, val int) {
-	if (l.head.id == val) {
-		auxNode := l.head
+	// If node to be deleted is the current head, delete it 
+	if l.head.id == val {
+		auxNode := l.head.next
 		l.head = nil
 		l.head = auxNode
+	} else {
+		// Middle node routine
+		auxNode := l.head
+		for l.head.next.id != val {
+			l.head = l.head.next	
+			fmt.Printf("current idx %v next %v\n", l.head.id, l.head.next.id)
+		} 
+		l.head.next = l.head.next.next
+		l.head = auxNode
 	}
+
+
 }
